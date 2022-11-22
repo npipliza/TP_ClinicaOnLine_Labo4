@@ -1,0 +1,85 @@
+<div class="fadeIn center bg-light">
+  <h3 class="texto bg-light"> <br>REGISTRAR NUEVO ESPECIALISTA </h3>
+  <hr class="my-4">
+</div>  
+  <form class="needs-validation trans padding" [formGroup]="forma" (ngSubmit)="Registrar()">
+    <div class="row g-3">
+      <div class="col-12">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre</label><br>
+        <input type="text" class="form-control border" formControlName="nombre" placeholder="Ingrese su nombre" required><br>
+        <small class="invalid rojo" *ngIf="forma.controls.nombre.errors?.required && forma.controls.nombre.touched"> El nombre es requerido </small>
+        <small class="invalid rojo" *ngIf="forma.controls.nombre.errors?.containsSpaces && forma.controls.nombre.touched"> El nombre no puede contener espacios </small>
+      </div>
+    
+      <div class="col-12">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apellido</label><br>
+        <input type="text" class="form-control border" formControlName="apellido" placeholder="Ingrese su apellido" ><br>
+        <small class="invalid rojo" *ngIf="forma.controls.apellido.errors?.required && forma.controls.apellido.touched"> El apellido es requerido </small>
+        <small class="invalid rojo" *ngIf="forma.controls.apellido.errors?.containsSpaces && forma.controls.apellido.touched"> El apellido no puede contener espacios </small>
+      </div>
+
+      <div class="col-12">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edad</label><br>
+        <input type="text" formControlName="edad" class="form-control border"  placeholder="Ingrese su edad" ><br>
+        <small class="invalid rojo" *ngIf="forma.controls.edad.errors?.required && forma.controls.edad.touched"> La edad es requerida</small>
+        <small class="invalid rojo" *ngIf="forma.controls.edad.errors?.min || forma.controls.edad.errors?.max && forma.controls.edad.touched"> La edad debe ser de 18 a 99 años </small>
+        <small class="invalid rojo" *ngIf=" forma.controls.edad.errors?.pattern && forma.controls.edad.touched"> La edad solo puede contener numeros </small>
+      </div>
+    
+      <div class="col-12">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DNI</label><br>
+        <input type="text" class="form-control border" formControlName="dni" placeholder="Ingrese su DNI" ><br>
+        <small class="invalid rojo" *ngIf="forma.controls.dni.errors?.required && forma.controls.dni.touched"> El dni es requerido </small>
+      <small class="invalid rojo" *ngIf="forma.controls.dni.errors?.pattern && forma.controls.dni.touched"> Ingrese sólo números </small>
+      </div>
+    
+      <div class="col-12">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Correo</label><br>
+        <input type="text" class="form-control border" formControlName="email" placeholder="Ingrese su correo"><br>
+        <small class="invalid rojo" *ngIf="forma.controls.email.errors?.required && forma.controls.email.touched"> El email es requerido </small>
+        <small class="invalid rojo" *ngIf="forma.controls.email.errors?.containsSpaces && forma.controls.email.touched"> El correo no puede contener espacios </small>
+      </div>
+    
+      <div class="col-12">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clave</label><br>
+        <input type="text" class="form-control border" formControlName="contrasena" placeholder="Ingrese una contraseña"><br>
+        <small class="invalid rojo" *ngIf="forma.controls.contrasena.errors?.required && forma.controls.contrasena.touched"> La contraseña es requerida </small>
+      </div>
+
+      <div class="col-5">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cargar imagen</label><br>
+        <input style="color: white;" formControlName="foto" (change)="elegirFoto($event)" type="file" accept=".png,.jpg" /><br>
+        <small class="invalid rojo" *ngIf="forma.controls.foto.errors?.required && forma.controls.foto.touched"> La Foto es requerida </small>
+        <small class="invalid" *ngIf="foto"> {{foto.name}} </small>
+      </div>
+
+      <div class="col-5">
+        <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nueva especialidad</label><br>
+          <input type="text" class="form-control border" formControlName="especialidadNueva" placeholder="Especialidad">
+      </div>
+      <div class="col-2">
+          <button class="fadeIn fourth boton-Agregar bg-transparent" type="button" (click)="subirEspecialidad()" value=""><img width="50" src="https://cdn-icons-png.flaticon.com/512/214/214353.png?w=740&t=st=1668570926~exp=1668571526~hmac=ce8b66b8c77c078a427b0f7fd9502398e8320d6c07fadb9e32f07f85d6e3237f"></button>
+      </div>
+
+      <div class="row">
+          <label class="form-label texto1">Especialidad</label>
+          <div class="col-6" >
+            <select formControlName="especialidad" class="form-control" >
+              <option value="" disabled>Elegir especialidad...</option>
+              <option value="clinico">Clínico</option>
+              <option value="cardiologia">Cardiología</option>
+              <option value="dermatologia">Dermatología</option>
+              <option value="odontologia">Odontología</option>
+              <option value="ginecologia">Ginecología</option>
+              <option value="pedriatria">Pediatría</option>
+            </select>
+          </div>
+        <div class=" col-6">
+          <ngx-recaptcha2 #captchaElem  [siteKey]="authService.siteKey" [useGlobalDomain]="false" formControlName="recaptcha"></ngx-recaptcha2>
+        </div>
+      </div>
+    </div>
+  
+  <hr class="my-4">
+  <button type="submit" [disabled]="forma.invalid" class=" center col-sm-6 fadeIn fourth boton-Agregar cursor" >Registrar</button>
+</form>

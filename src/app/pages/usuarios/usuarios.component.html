@@ -1,0 +1,54 @@
+    <div class="div_1">
+        <h3 class="texto">APROBACIONES PENDIENTES</h3>
+        <hr class="my-4">
+        <h6 class="texto" *ngIf="auth.noAprobadosA.length ==0">NO HAY APROBACIONES PENDIENTES</h6>
+        <div *ngFor="let espe of auth.noAprobadosA" class="div_aprobaciones">
+            <div>
+                <p class="texto">{{espe.apellido +", "+ espe.nombre}}</p>
+            </div>
+            <button class="boton_detalles" (click)="MostrarDetale(espe)">Detalles</button>
+        </div>
+        <hr class="my-4">
+    </div>
+
+    <div class="div_1">
+        <div  *ngIf="!mostrarDetalle">
+          <div class="fadeIn first center" >
+            <h2 routerLink="listado" class=" cursor texto"> LISTADO </h2>
+            </div>
+          <br><br>
+            <router-outlet></router-outlet>
+        </div>
+
+        <div *ngIf="mostrarDetalle">
+            <div class="enter" >
+                <h2 class="active cursor texto" > DETALLE </h2>
+                  <img class="center img_espe" src="{{especialista.foto}}" style="width: 80px;" id="" alt="usuario" />
+                </div>
+                <form class="needs-validation padding">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="firstName" class="form-label label_desc texto">Nombre: {{especialista.nombre}}</label>
+                    </div>
+                    <div class="col-12">
+                      <label for="lastName" class="form-label label_desc texto">Apellido: {{especialista.apellido}} </label>
+                    </div>
+                    <div class="col-12">
+                      <label for="firstName" class="form-label label_desc texto">Edad: {{especialista.edad}}</label>
+                    </div>
+                    <div class="col-12">
+                      <label for="firstName" class="form-label label_desc texto">Documento: {{especialista.dni}}</label>
+                    </div>
+                    <div class="col-12">
+                      <label for="email" class="form-label label_desc texto">Email: {{especialista.email}}</label>
+                    </div>     
+                    <div class="col-sm-12">
+                      <label for="firstName" class="form-label label_desc texto">Especialidades: <p *ngFor="let e of especialista.especialidades">- {{e}}</p></label>
+                    </div>
+                  </div>
+      
+                  <hr class="my-4">
+                  <button type="submit" class="fadeIn fourth boton-Agregar" (click)="aprobar(especialista.uid)">APROBAR</button>
+                </form>
+        </div>
+    </div>

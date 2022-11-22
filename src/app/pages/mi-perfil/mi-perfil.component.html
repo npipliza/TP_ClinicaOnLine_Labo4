@@ -1,0 +1,50 @@
+<body><br><br>
+    <div class="card">
+        <div class="div_titulo">
+            <div [appColorMiPerfil]="auth.UsuarioActivo.perfil" >
+            <img class="img" src="{{auth.UsuarioActivo.foto}}" class="fotoP1">
+            <img *ngIf="auth.UsuarioActivo.perfil=='paciente'"  class="fotoP2 bg-info" src="{{auth.UsuarioActivo.foto2}}">
+            </div>
+            <h1 class="texto bg-light">· Mi perfil ·</h1>
+        <div >
+            <div class="">
+                <h3 class="texto bg-light">{{auth.UsuarioActivo.apellido + " " + auth.UsuarioActivo.nombre}}</h3><br>
+                <p class="texto1"><b class="texto" style="margin-left:10px">DNI:</b>{{auth.UsuarioActivo.dni}} </p>
+                <p class="texto1"><b class="texto" *ngIf="auth.UsuarioActivo.perfil=='paciente'" style="margin-left:10px"> OBRA SOCIAL: </b>{{auth.UsuarioActivo.obra}}</p>
+                <p class="texto1"><b class="texto" style="margin-left:10px">EMAIL: </b>{{auth.UsuarioActivo.email}} </p>
+                <p class="texto1"><b class="texto" style="margin-left:10px">EDAD: </b>{{auth.UsuarioActivo.edad}}</p>
+                <hr class="my-4">
+                <div class="texto" *ngIf="auth.UsuarioActivo.perfil=='especialista'"><b>ESPECIALIDADES: {{especialidades}}</b></div><br>
+                <div class="texto" *ngIf="auth.UsuarioActivo.perfil=='especialista'">
+                    <hr class="my-4">
+                    <b class="texto">HORARIOS DE ATENCIÓN: </b>
+                    <p class="texto" style="text-align: center;">De <input type="number" [(ngModel)]="comienzo" placeholder="{{auth.UsuarioActivo.comienzoA}}"></p>
+                    <p class="texto" style="text-align: center;">A  <input type="number" [(ngModel)]="final" placeholder="{{auth.UsuarioActivo.finalA}}"></p>
+                    <button class="boton" (click)="cambiarHorarios()">Cambiar horarios</button>
+                </div>
+                <div class="div_botones gridTurnos" *ngIf="auth.UsuarioActivo.perfil=='paciente' && turnosFiltrados.length !=0">
+                    <div *ngFor="let usuario of auth.especialistas">
+                        <button (click)="generarExcelEspecialista(usuario)" class="boton_usuario">{{usuario.nombre+" "+usuario.apellido}}</button>
+                    </div>
+                </div>
+                <!-- pacientes -->
+                <div class="div_h" *ngIf="auth.UsuarioActivo.perfil=='paciente' && turnosFiltrados.length !=0">
+                    <div  class="h_card" *ngFor="let historial of turnosFiltrados">
+                        <div id="{{historial.fecha}}"></div>
+                            <div><img src="../../../assets/logoCompleted.png" style="margin-left: auto; margin-right:auto; width:60px"></div><br>
+                            <p class="texto"><b>{{historial.paciente.nombre + " "+ historial.paciente.apellido}}</b></p>   
+                            <p class="texto"><b>{{fecha}}</b></p>
+                            <p class="texto"><b>Peso: {{historial.historial.peso }}</b></p>                  
+                            <p class="texto"><b>Altura: {{historial.historial.altura}}</b></p>
+                            <p class="texto"><b>Temperatura: {{historial.historial.temperatura }}</b></p> 
+                            <p class="texto"><b>Presion: {{historial.historial.presion}}</b></p>
+                            <div *ngFor="let datos of historial.historial.datosDinamicos"><p>{{datos.clave + ": " + datos.valor}}</p>
+                        </div>
+                        <button class="boton" (click)="descargarPdf(historial.fecha)">DESCARGAR PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>

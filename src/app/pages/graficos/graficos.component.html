@@ -1,0 +1,39 @@
+<br>
+<div id="formContent">
+<mdb-carousel [dark]="true" [interval]=0 [controls]="true" [indicators]="false" [animation]="'slide'">
+    <mdb-carousel-item class="div_grafico" >
+        <h3 class="texto"><b>LOG DE INGRESOS AL SISTEMA</b></h3>
+        <div class="div_tabla">
+            <table  id="tablaIngresos" class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="texto">Usuario</th>
+                    <th class="texto" >Fecha</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let ingreso of auth.ingresos">
+                <tr>
+                    <td>{{ingreso.usuario}}</td>
+                    <td>{{ingreso.fecha | formatoFecha}}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    <button *ngIf="mostrar" class="boton" (click)="descargarPdf('tablaIngresos')">DESCARGAR PDF</button>
+    </mdb-carousel-item>
+    <mdb-carousel-item class="div_grafico" >
+        <h3 class="texto"><b>CANTIDAD DE TURNOS POR ESPECIALIDAD</b></h3>
+        <canvas id="graficoEspecialidad"></canvas>
+        <button *ngIf="mostrar" class="boton" (click)="descargarPdf('graficoEspecialidad')">DESCARGAR PDF</button><br>
+    </mdb-carousel-item>
+    <mdb-carousel-item class="div_grafico" >
+        <h3 class="texto">CANTIDAD DE TURNOS POR DÍA</h3>
+        <canvas  id="graficoDias"></canvas>
+        <button *ngIf="mostrar" class="boton" (click)="descargarPdf('graficoDias')">DESCARGAR PDF</button><br>
+    </mdb-carousel-item>
+    <mdb-carousel-item class="div_grafico" >
+        <h3 class="texto">CANTIDAD DE TURNOS POR ESPECIALISTA</h3>
+        <canvas id="graficoMedico"></canvas>
+        <button *ngIf="mostrar" class="boton" (click)="descargarPdf('graficoMedico')">DESCARGAR PDF</button><br>
+    </mdb-carousel-item>
+</mdb-carousel> 

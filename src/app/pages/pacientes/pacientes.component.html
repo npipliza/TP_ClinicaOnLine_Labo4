@@ -1,0 +1,92 @@
+<br><br>
+<div id="formContent">
+    <h1 class="texto"><b>MIS PACIENTES</b></h1>
+    <input *ngIf="false" type="text" style="width: 40%;" placeholder="Buscar" (ngModelChange)="hacerBusqueda()" [(ngModel)]="searchParam"><br>
+    <table *ngIf="false" class="table table-striped">
+        <thead>
+            <tr>
+                <th class="texto">Nombre</th>
+                <th class="texto">Email</th>
+                <th class="texto">DNI</th>
+                <th class="texto">Edad</th>
+                <th class="texto">Obra Social</th>
+                <th class="texto">Acciones</th>
+            </tr>
+        </thead>
+        <div style="text-align: center; width: 100%;" *ngIf="PacientesAtendidos.length == 0" ><h3 class="titulo" >No se han encontrado pacientes</h3><br></div>
+
+        <tbody *ngFor="let paciente of PacientesAtendidos">
+            <tr>
+                <td>{{paciente.apellido +", "+ paciente.nombre}}</td>
+                <td>{{paciente.email}}</td>
+                <td>{{paciente.dni}}</td>
+                <td>{{paciente.edad}}</td>
+                <td>{{paciente.obra}}</td>
+                <td><div style="display: flex;"><button class="boton_accion darkcyan" (click)="VerHistoriales(paciente.uid)">Historiales</button></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="mostrarTurnos" class="table table-striped">
+        <thead>
+            <tr>
+                <th class="texto">Fecha</th>
+                <th class="texto">Especialidad</th>
+                <th class="texto">Paciente</th>
+                <th class="texto">Estado</th>
+                <th class="texto">Acciones</th>
+            </tr>
+        </thead>
+        <div style="text-align: center; width: 100%;" *ngIf="turnosFiltradosUsuario.length == 0"><h3 class="titulo" >No se han encontrado turnos</h3><br></div>
+
+        <tbody *ngFor="let turno of turnosFiltradosUsuario">
+            <tr>
+                <td>{{turno.fecha}}</td>
+                <td>{{turno.especialidad}}</td>
+                <td>{{turno.paciente.apellido +", "+ turno.paciente.nombre}}</td>
+                <td>{{turno.estado}}</td>
+                <td><div style="display: flex;"><button class="boton_accion celeste" *ngIf="turno.comentario_usuario != ''" (click)="MostrarResena(turno)">HISTORIAL</button></div></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="div_botones gridTurnos2">
+        <div style="display: block;" *ngFor="let usuario of PacientesAtendidos">
+            <button (click)="VerTurnos(usuario)" class="boton_usuario" style="background-image: url({{usuario.foto}});"></button>
+            <b>{{usuario.nombre+" "+usuario.apellido}}</b>
+        </div>
+    </div>
+
+    <div class="div_fondo_filtro" *ngIf="mostrarHistoriales">
+        <div class="div_filtro">
+            <h3 class="texto">HISTORIAL</h3><br>
+            <div>
+                <div class="card_historial" *ngFor="let historial of historialesFiltrados">
+                    <div style="display: flex;">
+                        <div class="col-sm-6"><p class="texto"><b>ALTURA</b></p><p>{{historial.altura}}</p></div>
+                        <div class="col-sm-6" style="float: right;"><p class="texto"><b>PESO</b></p><p>{{historial.peso}}</p></div>
+                    </div>
+                    <div style="display: flex;">
+                        <div class="col-sm-6"><p class="texto"><b>TEMPERATURA</b></p><p>{{historial.temperatura}}</p></div>
+                        <div class="col-sm-6" style="float: right;"><p class="texto"><b>PRESION</b></p><p>{{historial.presion}}</p></div>
+                    </div>
+                    <div *ngFor="let dato of historial.datosDinamicos"><p>{{dato.clave}}: {{dato.valor}}</p></div>
+                </div>
+            </div>
+            <button class="boton-Agregar" (click)="cerrarHistoriales()">Cerrar</button>   
+        </div>
+    </div>
+
+    <div class="div_fondo_filtro" *ngIf="mostrarResena">
+        <div class="div_filtro2">
+            <h3 class="texto">HISTORIAL</h3><br>
+            <div style="text-align: center;">
+                <div style="text-align: center;">
+                    <p class="texto"><b>Historial del paciente</b></p>
+                    <p>{{TurnoSeleccionado.comentario_usuario}}</p>
+                </div>
+            </div>
+            <button class="boton-Agregar" (click)="CerrarResena()">Cerrar</button>
+        </div>
+    </div>
+ </div>

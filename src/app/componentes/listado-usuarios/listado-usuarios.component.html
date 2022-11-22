@@ -1,0 +1,11 @@
+
+<div  class="divcenter">
+    <button class="boton-Agregar center" (click)="generarExcel()">Generar Excel</button>
+</div>
+<div class="div_botones gridTurnos">
+    <div  *ngFor="let usuario of auth.pacientes">
+        <button  (click)="generarExcelUsuario(usuario)" 
+        class="boton_usuario" style="background-image: url({{usuario.foto}});"></button>
+        <b>{{usuario.nombre+" "+usuario.apellido}}</b>
+    </div>
+</div>

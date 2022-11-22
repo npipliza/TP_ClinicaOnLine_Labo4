@@ -1,0 +1,32 @@
+<div class="scale-up-ver-bottom " [ngSwitch]="auth.UsuarioActivo.perfil">
+    <div *ngSwitchCase="'admin'"><br><br><br>
+        <div class="row">
+            <div class="text-center mb-2 col-6">
+                <button class="btn color1 btn-primary" style="width: 400px; height: 400px; border-radius: 50%;" routerLink="turnos"><img style="width: 70%; height: 70%" src="https://cdn-icons-png.flaticon.com/512/1212/1212331.png" alt="sacar turno"/><h3 class="text-white">TURNOS</h3></button> 
+            </div>             
+            <div class="text-center mb-2 col-6">
+                <button class="btn rounded-circle btn-info" style="width: 400px; height: 400px" routerLink="graficos"><img style="width: 70%; height: 70%" src="https://cdn-icons-png.flaticon.com/512/2257/2257295.png" alt="mis turnos" /> <h3 class="text-white">ESTADÍSTICAS</h3></button> 
+            </div>             
+        </div>
+    </div>
+    <div *ngSwitchCase="'paciente'"><br><br><br>
+        <div class="row">
+            <div class="text-center mb-2 col-6">
+                <button class="btn rounded-circle btn-primary" style="width: 400px; height: 400px" routerLink="mis-turnos"><img style="width: 70%; height: 70%" src="https://cdn-icons-png.flaticon.com/512/1212/1212331.png" alt="mis turnos" /> <h3 class="text-white">MIS TURNOS</h3></button> 
+            </div>             
+            <div class="text-center mb-2 col-6">
+                <button class="btn color1 btn-info" style="width: 400px; height: 400px; border-radius: 50%;" routerLink="sacar-turno"><img style="width: 70%; height: 70%" src="https://cdn-icons-png.flaticon.com/512/1100/1100780.png" alt="sacar turno"/><h3 class="text-white">SACAR TURNO</h3></button> 
+            </div>             
+        </div>
+    </div>
+    <div *ngSwitchCase="'especialista'"><br><br><br>    
+        <div class="row">
+            <div class="text-center mb-2 col-6">
+                <button class="btn color1 btn-primary" style="width: 400px; height: 400px; border-radius: 50%;" routerLink="pacientes"><img style="width: 70%; height: 70%" src="https://cdn-icons-png.flaticon.com/512/2869/2869812.png" alt="sacar turno"/><h3 class="text-white">PACIENTES</h3></button> 
+            </div>             
+            <div class="text-center mb-2 col-6">
+                <button class="btn rounded-circle btn-info" style="width: 400px; height: 400px" routerLink="mis-turnos"><img style="width: 70%; height: 70%" src="https://cdn-icons-png.flaticon.com/512/1100/1100780.png" alt="mis turnos" /> <h3 class="text-white">TURNOS</h3></button> 
+            </div>             
+        </div>
+    </div>
+ </div>

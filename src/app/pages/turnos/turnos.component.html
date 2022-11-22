@@ -1,0 +1,51 @@
+<br>
+<br>
+
+<div id="formContent">
+    <h1 class="texto" >TURNOS</h1>
+    <br>
+    <input type="text" style="width: 40%;" placeholder="Buscar" (ngModelChange)="hacerBusqueda()" [(ngModel)]="searchParam">
+    <br>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="texto">Especialidad</th>
+                <th class="texto" >Especialista</th>
+                <th class="texto" >Paciente</th>
+                <th class="texto">Fecha</th>
+                <th class="texto">Estado</th>
+                <th class="texto">Acciones</th>
+            </tr>
+        </thead>
+        <tbody [appColorTurnos]="turno.estado" *ngFor="let turno of turnosFiltrados">
+            <tr>
+                <td>{{turno.especialidad}}</td>
+                <td>{{turno.especialista.apellido +", "+ turno.especialista.nombre}}</td>
+                <td>{{turno.paciente.apellido +", "+ turno.paciente.nombre}}</td>
+                <td>{{turno.fecha | formatoFecha}}</td>
+                <td>{{turno.estado}}</td>
+                <td>
+                    <div style="display: flex;">
+                        <button class="boton_accion rojo" *ngIf="turno.estado!='finalizado' && turno.estado!='cancelado'" (click)="MostrarCancelar(turno)">Cancelar</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table><br>
+    <div style="text-align: center; width: 100%;" *ngIf="turnosFiltrados.length == 0"><h3 class="titulo" >No se registran turnos</h3></div>
+
+    <div class="div_fondo_filtro" *ngIf="mostrarCancelar">
+        <div class="div_filtro">
+            <h3>Cancelar</h3>
+            <br>
+
+            <div style="width: 100%; height:100%">
+                <h4>MOTIVO</h4> 
+                <input type="text" [(ngModel)]="razon">
+                <br>
+                <button class="boton-Agregar" (click)="CancelarTurno()">Cancelar Turno</button>
+            </div>
+        </div>
+    </div>
+ </div>

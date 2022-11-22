@@ -1,0 +1,24 @@
+
+  <div class="container">
+    <div class="card text-center" >
+        <div class="card-header">
+            <b class="texto">INICIAR SESIÓN</b>
+        </div><br>
+          <form [formGroup]="forma" (ngSubmit)="Ingresar()">
+            <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Correo</label><br>
+            <input type="text"  class="fadeIn second border" formControlName="email" placeholder="Ingrese su correo electrónico"><br>
+            <small class="invalid texto_rojo" *ngIf="forma.controls.email.errors?.required && forma.controls.email.touched"> El email es requerido </small><br>
+            <label class="texto" style="float: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clave</label><br>
+            <input type="password"  class="fadeIn third border" formControlName="contrasena" placeholder="Ingrese su contraseña"><br>
+            <small class="invalid texto_rojo" *ngIf="forma.controls.contrasena.errors?.required && forma.controls.contrasena.touched"> La contraseña es requerida</small>
+            <br><br>
+            <button type="submit" [disabled]="forma.invalid" class="fadeIn fourth boton-Agregar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ingresar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </form>
+          <br>
+          <div class="fadeIn first div_botones">
+              <button *ngFor="let usuario of authService.usuariosLogin" style="width: 80px; height: 80px; border-radius: 50%; margin-left: 1rem; margin-right: 1rem; background-image: url('{{usuario.foto}}');" (click)="usuarioRapido(usuario)" class="boton_rapido btn color1"></button>
+          </div>
+          <p class="texto" >¿No tenes una cuenta? <b class="cursor" (click)="registrar()">REGISTRATE</b></p>
+        </div>
+      </div>
+ 

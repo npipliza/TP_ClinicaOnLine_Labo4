@@ -1,0 +1,12 @@
+<div class="container">
+    <app-inicios *ngIf="userLogged|async as user"></app-inicios>
+    <div class=""><br><br><br>
+    <div class="card-body p-4" >
+    <div class="card-header text-center bg-light"><br>
+    <img class="logoNav" style="width: 30%; height: 30%" src="../../../assets/logoCompleted.png" alt=""><br>
+    <h1 [appDirecTitulos]="" class="texto text-center bg-light"><b>BIENVENIDO</b></h1><br>
+    </div><br>
+    <a class="btn btn-success form-control " routerLink="/login">Iniciar Sesión</a><br><br>
+    <a class="btn btn-primary form-control " routerLink="/tipo-registro">Registrarte</a>
+    </div><br><br><br><br>
+</div>

@@ -1,0 +1,22 @@
+<br><br>
+<div class="bg-transparent" id="formContent">
+    <br>
+    <div class="fondoT" *ngIf="flag_especialidad">
+    <button class="btn botonE btn-primary mt-5 col-5" *ngFor="let especialidad of especialidades" (click)="seleccEspecialidad(especialidad.nombre)"  style="width: 2%; height: 2%; background-image: url({{especialidad.foto}});"></button>
+    </div>
+
+    <div class="center" *ngIf="flag_especialista">
+        <div class="" *ngFor="let especialista of especialistas">
+            <h5 class="texto1">{{especialista.apellido + ", " + especialista.nombre}}</h5>
+            <button style="width: 10%; height: 10%; background-image: url({{especialista.foto}});" *ngIf="especialista.aprobado" (click)="seleccEspecialista(especialista)" class="btn botonE mt-5 mb-5 col-6 btn-primary"></button>
+        </div><br><br>
+    </div>
+
+    <div class="" *ngIf="flag_Datos">
+        <img class="logoNav" style="width: 10%; height: 10%" src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt=""><br><br>
+        <div class="div_botones gridTurnos">
+            <button *ngFor="let turno of turnos" (click)="seleccionarTurno(turno)" class="btn botonT btn-primary mt-1">{{turno | formatoFecha}} </button>
+        </div><br><br>
+    </div>
+</div>
+  
