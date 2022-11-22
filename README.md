@@ -1,4 +1,4 @@
-<p align="center"><img src=""></p>
+<p align="center"><img src="./logoCompleted.png"></p>
 <h1 align="center"> CLINICA ONLINE </h1>
  <hr>
  <p align="center">
